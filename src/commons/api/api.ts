@@ -18,9 +18,6 @@ export const api = async <T = unknown>({
 
   const response = await fetch(`${API_URL}&${url}`, {
     method,
-    headers: {
-      "Content-Type": "application/json",
-    },
     body: request ? JSON.stringify(request) : undefined,
   });
   return (await response.json()) as Promise<T>;
