@@ -1,5 +1,5 @@
-import { Input } from "@chakra-ui/react";
 import React from "react";
+import { Input } from "@chakra-ui/react";
 
 export interface SearchProps {
   search?: string;
@@ -16,6 +16,8 @@ export const Search = ({ search, onSearch }: SearchProps) => {
   return (
     <Input
       value={searchText || ""}
+      minWidth="30rem"
+      minHeight="4rem"
       onChange={(event) => {
         handleSearch(event.target.value);
       }}
@@ -25,3 +27,5 @@ export const Search = ({ search, onSearch }: SearchProps) => {
     />
   );
 };
+
+export default Search;

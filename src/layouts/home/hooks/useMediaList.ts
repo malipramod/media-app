@@ -1,25 +1,50 @@
 import React from "react";
+import { useSearchParams } from "react-router-dom";
 import { useDebounce } from "../../../commons/hooks";
 import { fetchMediaList } from "../services";
+import { MediaSearchResult } from "../../../commons/types";
 
 interface UseMediaListParams {
   search?: string;
 }
+
+const defaultMediaList: MediaSearchResult = {
+  Response: "False",
+  Search: [],
+  totalResults: "0",
+  Error: "Please enter a search term",
+};
+
 export const useMediaList = ({ search }: UseMediaListParams) => {
   const { onDebounce } = useDebounce({});
-  const [_search, setSearch] = React.useState(search);
+  const [params, setSearchParams] = useSearchParams();
+  const query = params.get("s");
+  const [_search, setSearch] = React.useState(query || search);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [mediaList, setMediaList] =
+    React.useState<MediaSearchResult>(defaultMediaList);
 
   const handleSearch = (search: string) => {
-    onDebounce(search, () => setSearch(search));
+    onDebounce(search, () => {
+      setSearchParams({ s: search });
+      setSearch(search);
+    });
   };
 
   const getMediaList = React.useCallback(async (search?: string) => {
-    if (!search) return;
+    if (!search) {
+      setMediaList(defaultMediaList);
+      return;
+    }
+
     try {
+      setIsLoading(true);
       const data = await fetchMediaList(search);
-      console.log(data);
+      setMediaList(data);
     } catch (e) {
       console.log(e);
+    } finally {
+      setIsLoading(false);
     }
   }, []);
 
@@ -27,8 +52,14 @@ export const useMediaList = ({ search }: UseMediaListParams) => {
     getMediaList(_search);
   }, [_search, getMediaList]);
 
+  React.useEffect(() => {
+    if (query) setSearch(query);
+  }, [query]);
+
   return {
     search: _search,
+    isLoading,
+    mediaList,
     onSearch: handleSearch,
   };
 };

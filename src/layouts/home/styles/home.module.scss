@@ -1,0 +1,5 @@
+@import "../../../commons/styles/utils.scss";
+
+.home {
+  @include flex-container(column, center, center, wrap, 2rem);
+}

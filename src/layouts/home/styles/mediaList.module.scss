@@ -1,0 +1,36 @@
+@import "../../../commons/styles/utils.scss";
+
+$card-height: 35rem;
+$card-width: 25rem;
+
+.list {
+  @include flex-container(row, center, flex-start, wrap, 2rem);
+
+  .card {
+    cursor: pointer;
+    width: $card-width;
+    height: $card-height;
+
+    .title {
+      @extend %ellipsis;
+    }
+
+    .body {
+      @include flex-container(row, center, center, wrap, 1rem);
+
+      .poster {
+        height: calc(#{$card-height} - 10rem);
+        width: calc(#{$card-width} - 5rem);
+        border-radius: 1rem;
+      }
+    }
+
+    &:hover {
+      .poster {
+        transform: scale(1.1);
+        border-radius: 0;
+        transition: transform 0.5s;
+      }
+    }
+  }
+}
