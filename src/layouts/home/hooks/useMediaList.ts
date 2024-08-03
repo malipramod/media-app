@@ -53,7 +53,7 @@ export const useMediaList = ({ search }: UseMediaListParams) => {
   }, [_search, getMediaList]);
 
   React.useEffect(() => {
-    if (query) setSearch(query);
+    setSearch(query || "");
   }, [query]);
 
   return {
