@@ -5,8 +5,8 @@ import {
   CardBody,
   CardFooter,
   Image,
-  Spinner,
   Heading,
+  Skeleton,
 } from "@chakra-ui/react";
 import { CalendarIcon, StarIcon } from "@chakra-ui/icons";
 import { MediaSearchResult } from "../../../commons/types";
@@ -21,7 +21,16 @@ export const MediaList = ({ list, isLoading }: MediaListProps) => {
   const navigate = useNavigate();
   const { Search = [], Response, Error } = list || {};
 
-  if (isLoading) return <Spinner />;
+  if (isLoading)
+    return (
+      <div className={styles.loading}>
+        {Array(10)
+          .fill("")
+          .map((_, index) => (
+            <Skeleton key={index} className={styles.skeleton} />
+          ))}
+      </div>
+    );
 
   if (Response === "False") return <Heading size="lg">{Error}</Heading>;
 

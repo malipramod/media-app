@@ -3,6 +3,16 @@
 $card-height: 35rem;
 $card-width: 25rem;
 
+.loading {
+  @include flex-container(row, center, center, wrap, 2rem);
+
+  .skeleton {
+    width: $card-width;
+    height: $card-height;
+    border-radius: 1rem;
+  }
+}
+
 .list {
   @include flex-container(row, center, flex-start, wrap, 2rem);
 

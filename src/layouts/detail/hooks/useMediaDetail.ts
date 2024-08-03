@@ -42,7 +42,8 @@ export const useMediaDetail = () => {
   }, [getMediaDetail]);
 
   const handleGoBack = () => {
-    navigate(-1);
+    if (history.length > 2) navigate(-1);
+    else navigate("/");
   };
 
   return {
