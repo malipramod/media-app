@@ -1,5 +1,14 @@
+import { Search } from "./Search";
+import { useMediaList } from "../hooks";
+
 export const Home = () => {
-  return <div>Home page</div>;
+  const { search, onSearch } = useMediaList({});
+
+  return (
+    <div>
+      <Search onSearch={onSearch} search={search} />
+    </div>
+  );
 };
 
 export default Home;
