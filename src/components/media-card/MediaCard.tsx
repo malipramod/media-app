@@ -5,8 +5,9 @@ export interface MediaCardProps {
   list?: Array<string>;
   heading: string;
 }
-export const MediaCard = ({ list, heading }: MediaCardProps) =>
-  list && (
+
+export const MediaCard = ({ list = [], heading }: MediaCardProps) =>
+  list?.length > 0 && (
     <Card className={styles.card}>
       <CardHeader>
         <Heading size="md">{heading}</Heading>

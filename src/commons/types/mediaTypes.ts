@@ -29,6 +29,7 @@ export interface MediaDetails extends MedialDetailBase {
   Released: string;
   Runtime: string;
   Genre: string;
+  BoxOffice: string;
   Director: string;
   Writer: string;
   Actors: string;
@@ -41,7 +42,6 @@ export interface MediaDetails extends MedialDetailBase {
   imdbRating: string;
   imdbVotes: string;
   totalSeasons: string;
-  Response: string;
 }
 
 export interface Rating {

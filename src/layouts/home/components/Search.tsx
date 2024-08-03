@@ -8,6 +8,10 @@ export interface SearchProps {
 export const Search = ({ search, onSearch }: SearchProps) => {
   const [searchText, setSearchText] = React.useState(search);
 
+  React.useEffect(() => {
+    setSearchText(search);
+  }, [search]);
+
   const handleSearch = (search: string) => {
     onSearch(search);
     setSearchText(search);

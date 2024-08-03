@@ -1,5 +1,10 @@
 @import "../../../commons/styles/utils.scss";
 
+.back {
+  @include flex-container(row, flex-start, center, nowrap, 1rem);
+  margin: 1rem;
+}
+
 .container {
   @include flex-container(row, center, flex-start, nowrap, 2rem);
 

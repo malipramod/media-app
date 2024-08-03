@@ -1,15 +1,20 @@
-import { Spinner, Image, Heading, Button } from "@chakra-ui/react";
-import { CalendarIcon, RepeatClockIcon } from "@chakra-ui/icons";
+import { Spinner, Image, Heading, Button, IconButton } from "@chakra-ui/react";
+import { CalendarIcon, TimeIcon, ArrowBackIcon } from "@chakra-ui/icons";
 import MediaCard from "../../../components/media-card";
+import AdditionalMediaDetails from "./AdditionalMediaDetails";
 import { useMediaDetail } from "../hooks";
 import Rating from "../../../components/rating";
 import Tags from "../../../components/tags";
 import styles from "../styles/detail.module.scss";
 
 export const MediaDetail = () => {
-  const { isLoading, mediaDetail } = useMediaDetail();
-
-  console.log(mediaDetail);
+  const {
+    isLoading,
+    mediaDetail,
+    showMoreDetails,
+    onShowMoreDetails,
+    onNavigateBack,
+  } = useMediaDetail();
   const {
     Poster,
     Title,
@@ -25,30 +30,55 @@ export const MediaDetail = () => {
   if (isLoading) return <Spinner />;
 
   return (
-    <div className={styles.container}>
-      <Image className={styles.poster} src={Poster} alt={Title} />
-      <div className={styles.details}>
-        <Heading size="3xl">{Title}</Heading>
-        <Heading size="lg">{Plot}</Heading>
-        <Rating rating={imdbRating} />
-        <Tags tags={Genre?.split(",") || []} />
-        <div className={styles.iconContainer}>
-          <RepeatClockIcon className={styles.icon} />
-          <Heading size="lg">{Runtime}</Heading>
-        </div>
-        <div className={styles.iconContainer}>
-          <CalendarIcon className={styles.icon} />
-          <Heading size="lg">{Released}</Heading>
-        </div>
-        <Button size="lg" colorScheme="blue">
-          View More details
-        </Button>
+    <>
+      <div className={styles.back}>
+        <IconButton
+          onClick={onNavigateBack}
+          aria-label="Search database"
+          icon={<ArrowBackIcon />}
+        />
+        <Heading size="md">Back to Search</Heading>
       </div>
-      <div className={styles.misc}>
-        <MediaCard list={Director?.split(",")} heading="Director(s)" />
-        <MediaCard list={Actors?.split(",")} heading="Cast" />
+      <div className={styles.container}>
+        <Image className={styles.poster} src={Poster} alt={Title} />
+        <div className={styles.details}>
+          <Heading size="3xl">{Title}</Heading>
+          <Heading size="lg">{Plot}</Heading>
+          <Rating rating={imdbRating} />
+          <Tags tags={Genre?.split(",") || []} />
+          <div className={styles.iconContainer}>
+            <TimeIcon className={styles.icon} />
+            <Heading size="lg">{Runtime}</Heading>
+          </div>
+          <div className={styles.iconContainer}>
+            <CalendarIcon className={styles.icon} />
+            <Heading size="lg">{Released}</Heading>
+          </div>
+          <Button
+            size="lg"
+            colorScheme="blue"
+            onClick={() => onShowMoreDetails(true)}
+          >
+            View More details
+          </Button>
+        </div>
+        <div className={styles.misc}>
+          <MediaCard
+            list={Director?.toLowerCase() !== "n/a" ? Director?.split(",") : []}
+            heading="Director(s)"
+          />
+          <MediaCard
+            list={Actors?.toLowerCase() !== "n/a" ? Actors?.split(",") : []}
+            heading="Cast"
+          />
+        </div>
+        <AdditionalMediaDetails
+          mediaDetail={mediaDetail}
+          isOpen={showMoreDetails}
+          onClose={() => onShowMoreDetails(false)}
+        />
       </div>
-    </div>
+    </>
   );
 };
 

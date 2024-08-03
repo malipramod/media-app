@@ -25,6 +25,16 @@ $card-width: 25rem;
       }
     }
 
+    .footer {
+      @include flex-container(row, space-between, center, wrap, 1rem);
+
+      .item {
+        @include flex-container(row, center, center, wrap, 0.5rem);
+
+        text-transform: capitalize;
+      }
+    }
+
     &:hover {
       .poster {
         transform: scale(1.1);

@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useToast } from "@chakra-ui/react";
 import { MediaDetails, MediaError } from "../../../commons/types";
 import { fetchMediaDetails } from "../services";
@@ -7,8 +7,10 @@ import { fetchMediaDetails } from "../services";
 export const useMediaDetail = () => {
   const [isLoading, setIsLoading] = React.useState(false);
   const [mediaDetail, setMediaDetail] = React.useState<MediaDetails>();
+  const [showMoreDetails, setShowMoreDetails] = React.useState(false);
   const { id } = useParams();
   const toast = useToast();
+  const navigate = useNavigate();
 
   const getMediaDetail = React.useCallback(async () => {
     try {
@@ -39,8 +41,15 @@ export const useMediaDetail = () => {
     getMediaDetail();
   }, [getMediaDetail]);
 
+  const handleGoBack = () => {
+    navigate(-1);
+  };
+
   return {
     mediaDetail,
     isLoading,
+    showMoreDetails,
+    onShowMoreDetails: setShowMoreDetails,
+    onNavigateBack: handleGoBack,
   };
 };
