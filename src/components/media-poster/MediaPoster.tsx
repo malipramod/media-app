@@ -10,7 +10,7 @@ export const MediaPoster = ({ src, title, className }: MediaPosterProps) => {
   return src?.indexOf("http") === 0 ? (
     <Image className={className} src={src} alt={title} />
   ) : (
-    <Heading size="lg">No Post for this media</Heading>
+    <Heading size="lg">No Image for this media</Heading>
   );
 };
 
