@@ -2,7 +2,7 @@ import React from "react";
 import type { AppRoute } from "../types";
 
 const Home = React.lazy(() => import("../../layouts/home/components"));
-const Detail = React.lazy(() => import("../../layouts/detail/components"));
+const MediaDetail = React.lazy(() => import("../../layouts/detail/components"));
 
 export const routes: Array<AppRoute> = [
   {
@@ -12,7 +12,7 @@ export const routes: Array<AppRoute> = [
   },
   {
     id: "detail",
-    component: <Detail />,
+    component: <MediaDetail />,
     path: "/details/:id",
   },
   {

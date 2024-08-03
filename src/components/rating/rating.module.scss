@@ -1,0 +1,11 @@
+@import "../../commons//styles//utils.scss";
+
+.rating {
+  @include flex-container(row, flex-start, flex-start, wrap, 0.5rem);
+
+  .star {
+    width: 1.6rem;
+    height: 1.6rem;
+    color: #868626;
+  }
+}

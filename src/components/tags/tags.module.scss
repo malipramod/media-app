@@ -1,0 +1,10 @@
+@import "../../commons//styles//utils.scss";
+
+.tags {
+  @include flex-container(row, center, center, wrap, 1rem);
+
+  .tag {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+  }
+}

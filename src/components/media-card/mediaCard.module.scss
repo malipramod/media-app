@@ -1,0 +1,12 @@
+@import "../../commons//styles//utils.scss";
+
+.card {
+  width: 100%;
+  .cardBody {
+    @include flex-container(column, flex-start, flex-start, wrap, 1rem);
+
+    .item {
+      @include flex-container(row, flex-start, center, wrap, 1rem);
+    }
+  }
+}

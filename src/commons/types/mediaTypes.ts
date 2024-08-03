@@ -1,11 +1,16 @@
-export interface MediaSearchResult {
-  Search: Array<Search>;
-  totalResults: string;
-  Response: "True" | "False";
-  Error?: string;
+export type ResponseType = "True" | "False";
+
+export interface MediaError {
+  Response: ResponseType;
+  Error: string;
 }
 
-export interface Search {
+export interface MediaSearchResult extends MediaError {
+  Search: Array<MedialDetailBase>;
+  totalResults: string;
+}
+
+export interface MedialDetailBase {
   Title: string;
   Year: string;
   imdbID: string;
@@ -17,4 +22,29 @@ export enum Type {
   Game = "game",
   Movie = "movie",
   Series = "series",
+}
+
+export interface MediaDetails extends MedialDetailBase {
+  Rated: string;
+  Released: string;
+  Runtime: string;
+  Genre: string;
+  Director: string;
+  Writer: string;
+  Actors: string;
+  Plot: string;
+  Language: string;
+  Country: string;
+  Awards: string;
+  Ratings: Array<Rating>;
+  Metascore: string;
+  imdbRating: string;
+  imdbVotes: string;
+  totalSeasons: string;
+  Response: string;
+}
+
+export interface Rating {
+  Source: string;
+  Value: string;
 }

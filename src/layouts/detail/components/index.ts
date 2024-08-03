@@ -1,3 +1,3 @@
-import Detail from "./Detail";
-export default Detail;
-export * from "./Detail";
+import MediaDetail from "./MediaDetail";
+export default MediaDetail;
+export * from "./MediaDetail";
