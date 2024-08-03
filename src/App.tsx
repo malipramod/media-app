@@ -1,5 +1,14 @@
+import { Routes, Route } from "react-router-dom";
+import { routes } from "./commons/routes";
+
 function App() {
-  return <div>React app</div>;
+  return (
+    <Routes>
+      {routes.map(({ id, component, path }) => (
+        <Route key={id} path={path} element={component} />
+      ))}
+    </Routes>
+  );
 }
 
 export default App;
