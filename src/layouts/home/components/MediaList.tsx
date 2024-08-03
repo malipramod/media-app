@@ -4,11 +4,11 @@ import {
   CardHeader,
   CardBody,
   CardFooter,
-  Image,
   Heading,
   Skeleton,
 } from "@chakra-ui/react";
 import { CalendarIcon, StarIcon } from "@chakra-ui/icons";
+import { MediaPoster } from "../../../components/media-poster";
 import { MediaSearchResult } from "../../../commons/types";
 import styles from "../styles/mediaList.module.scss";
 
@@ -52,9 +52,7 @@ export const MediaList = ({ list, isLoading }: MediaListProps) => {
             </Heading>
           </CardHeader>
           <CardBody className={styles.body}>
-            {Poster.indexOf("http") === 0 && (
-              <Image className={styles.poster} src={Poster} alt={Title} />
-            )}
+            <MediaPoster src={Poster} title={Title} className={styles.poster} />
           </CardBody>
           <CardFooter className={styles.footer}>
             <div className={styles.item}>

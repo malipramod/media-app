@@ -26,7 +26,7 @@ export const AdditionalMediaDetails = ({
   mediaDetail,
   onClose,
 }: AdditionalMediaDetailsProps) => {
-  const { Awards, Ratings, BoxOffice, Title } = mediaDetail || {};
+  const { Awards, Ratings = [], BoxOffice, Title } = mediaDetail || {};
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="2xl">
       <ModalOverlay />
@@ -36,38 +36,46 @@ export const AdditionalMediaDetails = ({
         </ModalHeader>
         <ModalCloseButton />
         <ModalBody className={styles.modalBody}>
-          <Card className={styles.card}>
-            <CardBody className={styles.cardBody}>
-              <Heading size="lg" className={styles.label}>
-                Awards
-              </Heading>
-              <Heading size="md">{Awards}</Heading>
-            </CardBody>
-          </Card>
-          <Card className={styles.card}>
-            <CardBody className={styles.cardBody}>
-              <Heading size="lg" className={styles.label}>
-                Ratings
-              </Heading>
-              <Heading size="md" className={styles.ratings}>
-                {Ratings?.map(({ Source, Value }) => (
-                  <Tag
-                    className={styles.rating}
-                    size="xl"
-                    key={Source}
-                  >{`${Source}: ${Value}`}</Tag>
-                ))}
-              </Heading>
-            </CardBody>
-          </Card>
-          <Card className={styles.card}>
-            <CardBody className={styles.cardBody}>
-              <Heading size="lg" className={styles.label}>
-                Box Office
-              </Heading>
-              <Heading size="md">{BoxOffice}</Heading>
-            </CardBody>
-          </Card>
+          {Awards && (
+            <Card className={styles.card}>
+              <CardBody className={styles.cardBody}>
+                <Heading size="lg" className={styles.label}>
+                  Awards
+                </Heading>
+                <Heading size="md">{Awards}</Heading>
+              </CardBody>
+            </Card>
+          )}
+          {Ratings?.length > 0 && (
+            <Card className={styles.card}>
+              <CardBody className={styles.cardBody}>
+                <Heading size="lg" className={styles.label}>
+                  Ratings
+                </Heading>
+                <Heading size="md" className={styles.ratings}>
+                  {Ratings?.map(({ Source, Value }) => (
+                    <Tag
+                      className={styles.rating}
+                      size="xl"
+                      key={Source}
+                    >{`${Source}: ${Value}`}</Tag>
+                  ))}
+                </Heading>
+              </CardBody>
+            </Card>
+          )}
+          {BoxOffice && (
+            <Card className={styles.card}>
+              <CardBody className={styles.cardBody}>
+                <Heading size="lg" className={styles.label}>
+                  Box Office
+                </Heading>
+                <Heading className={styles.boxOffice} size="md">
+                  {BoxOffice}
+                </Heading>
+              </CardBody>
+            </Card>
+          )}
         </ModalBody>
         <ModalFooter>
           <Button size="lg" colorScheme="blue" mr={3} onClick={onClose}>
