@@ -1,4 +1,4 @@
-const API_KEY = "<your_key>";
+const API_KEY = import.meta.env.VITE_OMDB_API_KEY;
 const API_URL = `https://www.omdbapi.com/?apikey=${API_KEY}`;
 
 type Method = "GET" | "POST" | "PUT" | "DELETE";
